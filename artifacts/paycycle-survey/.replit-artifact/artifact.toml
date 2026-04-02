@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "PayCycle Survey"
+version = "1.0.0"
+id = "artifacts/paycycle-survey"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 19569
+
+[services.development]
+run = "pnpm --filter @workspace/paycycle-survey run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/paycycle-survey", "run", "build" ]
+publicDir = "artifacts/paycycle-survey/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "19569"
+BASE_PATH = "/"

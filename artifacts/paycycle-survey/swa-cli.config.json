@@ -1,0 +1,12 @@
+{
+  "$schema": "https://aka.ms/azure/static-web-apps-cli/schema",
+  "configurations": {
+    "paycycle-survey": {
+      "appLocation": "artifacts/paycycle-survey",
+      "outputLocation": "dist/public",
+      "appBuildCommand": "pnpm --filter @workspace/paycycle-survey run build",
+      "run": "pnpm --filter @workspace/paycycle-survey run dev",
+      "appDevserverUrl": "http://localhost:3000"
+    }
+  }
+}
