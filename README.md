@@ -135,6 +135,35 @@ Output is written to `artifacts/paycycle-survey/dist/public/`. This folder is wh
 
 ---
 
+## GitHub Secrets (Required for CI/CD)
+
+The GitHub Actions workflow injects Supabase credentials at build time via repository secrets. Without these, the Azure deployment will build but the app will crash at runtime.
+
+### Adding the secrets
+
+1. Go to your GitHub repository → **Settings** → **Secrets and variables** → **Actions**
+2. Click **New repository secret** and add each of the following:
+
+| Secret name | Where to find the value |
+|---|---|
+| `VITE_SUPABASE_URL` | Supabase Dashboard → Project → Settings → API → Project URL |
+| `VITE_SUPABASE_ANON_KEY` | Supabase Dashboard → Project → Settings → API → `anon` `public` key |
+
+> These are injected as environment variables during the build step and baked into the static bundle. They are never stored in the repo or committed to source control.
+
+### Local development
+
+Copy the environment template and fill in your values:
+
+```bash
+cp artifacts/paycycle-survey/.env.example artifacts/paycycle-survey/.env
+# then edit .env with your actual Supabase credentials
+```
+
+The `.env` file is gitignored and will never be committed.
+
+---
+
 ## Project Structure
 
 ```
